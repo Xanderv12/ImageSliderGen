@@ -57,7 +57,19 @@ def generatorFiles(title, imgURL1, imgURL2): # This function will operate simila
             destFile.write(htmlContent)
             print("HTML file created successfully.")
 
-"""
+    # Moving the newly created directory and files to the perfered destination
+    # ADJUST AS NEEDED FOR YOUR SYSTEM
+    directoryPath = f'{title}' # Directory path is in repository
+    directCheck =  # Path to check if directory created by script already exists
+    destinationPath = "please" # Path to where newly created directory will be moved to
+
+    if os.path.isdir(directCheck):
+        print("DIRECTORY ALREADY EXISTS AT DESTINATION, DELETING NEWLY MADE DIRECTORY")
+        shutil.rmtree(title)
+    else:
+        shutil.move(directoryPath, destinationPath)
+        print(f"Directory '{title}' moved successfully to '{destinationPath}'.")
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         parser = argparse.ArgumentParser(description="PHP Form Data")
@@ -72,9 +84,11 @@ if __name__ == "__main__":
         )
         print(message)
         sys.exit(0 if success else 1)
-"""
+
 #--------------------Test Values--------------------
+'''
 temp1 = "over"
 temp2 = "the"
 temp3 = "rainbow"
 generatorFiles(temp1, temp2, temp3)
+'''
