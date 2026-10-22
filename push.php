@@ -2,8 +2,8 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Escape all user inputs to ensure security
-    $base_dir    = escapeshellarg($_POST['base_dir']);
-    $imgURL1  = escapeshellarg($_POST['imgURL1']);
+    $base_dir = escapeshellarg($_POST['base_dir']);
+    $imgURL1 = escapeshellarg($_POST['imgURL1']);
     $imgURL2 = escapeshellarg($_POST['imgURL2']);
 
     // Adjust python path and script path to match your server environment
