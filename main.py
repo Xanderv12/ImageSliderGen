@@ -60,15 +60,15 @@ def generatorFiles(title, imgURL1, imgURL2): # This function will operate simila
     # Moving the newly created directory and files to the perfered destination
     # ADJUST AS NEEDED FOR YOUR SYSTEM
     directoryPath = f'{title}' # Directory path is in repository
-    directCheck =  # Path to check if directory created by script already exists
+    directCheck = 'placeholder' # Path to check if directory created by script already exists
     destinationPath = "please" # Path to where newly created directory will be moved to
 
     if os.path.isdir(directCheck):
-        print("DIRECTORY ALREADY EXISTS AT DESTINATION, DELETING NEWLY MADE DIRECTORY")
+        return False, "DIRECTORY ALREADY EXISTS AT DESTINATION, DELETING NEWLY MADE DIRECTORY"
         shutil.rmtree(title)
     else:
         shutil.move(directoryPath, destinationPath)
-        print(f"Directory '{title}' moved successfully to '{destinationPath}'.")
+        return True, (f"Directory '{title}' moved successfully to '{destinationPath}'.")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

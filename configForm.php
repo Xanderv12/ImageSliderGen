@@ -1,16 +1,12 @@
 <!-- configForm.php -->
 <?php
-// Set session cookie to expire when the browser is closed (lifetime = 0)
-// and restrict it to secure parameters if using HTTPS
-session_set_cookie_params([
-    'lifetime' => 0, 
-    'path' => '/',
-    'domain' => $_SERVER['HTTP_HOST'],
-    'secure' => isset($_SERVER['HTTPS']), // true if HTTPS
-    'httponly' => true,
-    'samesite' => 'Strict'
-]);
 session_start();
+/*
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+exit();
+*/
 
 // Check if the user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {

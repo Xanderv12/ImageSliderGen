@@ -16,6 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Execute script
     $output = shell_exec($command);
 
+    $_SESSION = array(); // Clear session data
+
+    // Clear the session cookie if it exists
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
     echo "<h3>Execution Result:</h3>";
     echo "<pre>" . htmlspecialchars($output) . "</pre>";
     echo '<br><a href="configForm.php">Back to Form</a>';
