@@ -4,7 +4,7 @@ import os # used to join paths and not hard code file paths
 import shutil # Used to copy template files and move the directory and its contents after creation
 
 
-def generatorFiles(title, imgURL1, imgURL2): # This function will operate similary to the bookreader script
+def generatorFiles(title, header, imgURL1, imgURL2): # This function will operate similary to the bookreader script
     #--------------------Global Varibales--------------------
     templateFolder = "templates"
     htmlFile = "index.html"
@@ -49,6 +49,7 @@ def generatorFiles(title, imgURL1, imgURL2): # This function will operate simila
         # Read the HTML template and replace placeholders with actual values
         with open(htmlPath, 'r', encoding='utf-8') as htmlFile:
             htmlContent = htmlFile.read()
+            htmlContent = htmlContent.replace('{{header}}', header)
             htmlContent = htmlContent.replace('{{imgURL1}}', imgURL1)
             htmlContent = htmlContent.replace('{{imgURL2}}', imgURL2)
 
@@ -60,12 +61,13 @@ def generatorFiles(title, imgURL1, imgURL2): # This function will operate simila
     # Moving the newly created directory and files to the perfered destination
     # ADJUST AS NEEDED FOR YOUR SYSTEM
     directoryPath = f'{title}' # Directory path is in repository
-    directCheck = 'placeholder' # Path to check if directory created by script already exists
+    directCheck = f'please/{title}' # Path to check if directory created by script already exists
     destinationPath = "please" # Path to where newly created directory will be moved to
 
     if os.path.isdir(directCheck):
-        return False, "DIRECTORY ALREADY EXISTS AT DESTINATION, DELETING NEWLY MADE DIRECTORY"
         shutil.rmtree(title)
+        print("DIRECTORY ALREADY EXISTS AT DESTINATION, DELETING NEWLY MADE DIRECTORY")
+        return False
     else:
         shutil.move(directoryPath, destinationPath)
         return True, (f"Directory '{title}' moved successfully to '{destinationPath}'.")
@@ -74,21 +76,22 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         parser = argparse.ArgumentParser(description="PHP Form Data")
         parser.add_argument("title")
+        parser.add_argument("header")
         parser.add_argument("imgURL1")
         parser.add_argument("imgURL2")
 
         
         args = parser.parse_args()
         success, message = generatorFiles(
-            args.title, args.imgURL1, args.imgURL2
+            args.title, args.header, args.imgURL1, args.imgURL2
         )
         print(message)
         sys.exit(0 if success else 1)
 
 #--------------------Test Values--------------------
-'''
-temp1 = "over"
-temp2 = "the"
-temp3 = "rainbow"
-generatorFiles(temp1, temp2, temp3)
-'''
+
+temp1 = "Somewhere"
+temp2 = "over"
+temp3 = "the"
+temp4 = "rainbow"
+generatorFiles(temp1, temp2, temp3, temp4)

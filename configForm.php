@@ -20,6 +20,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 <head>
     <meta charset="UTF-8">
     <title>Generate Image Slider</title>
+    <link rel="stylesheet" href="prettier.css">
 </head>
 <body>
     <h2>Generate Image Slider</h2>
@@ -28,6 +29,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         <h3>Please Provide Following Information</h3>
         <label>Title of Work:</label><br>
         <input type="text" name="base_dir" required><br><br>
+
+        <label>Header:</label><br>
+        <input type="text" name="headerTxt" required><br><br>
 
         <label>URL of the 1st Image:</label><br>
         <input type="text" name="imgURL1" required><br><br>
